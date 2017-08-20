@@ -1,4 +1,14 @@
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("reqt", [], factory);
+	else if(typeof exports === 'object')
+		exports["reqt"] = factory();
+	else
+		root["reqt"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -75,6 +85,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.find = find;
 exports.create = create;
+exports.update = update;
+exports.replace = replace;
+exports.destroy = destroy;
 
 var _store = __webpack_require__(1);
 
@@ -90,7 +103,19 @@ function create(collection) {
   return new _store2.default(collection, { method: 'post' });
 }
 
-exports.default = { find: find, create: create };
+function update(collection) {
+  return new _store2.default(collection, { method: 'patch' });
+}
+
+function replace(collection) {
+  return new _store2.default(collection, { method: 'put' });
+}
+
+function destroy(collection) {
+  return new _store2.default(collection, { method: 'delete' });
+}
+
+exports.default = { find: find, create: create, update: update, replace: replace, destroy: destroy };
 
 /***/ }),
 /* 1 */
@@ -165,6 +190,11 @@ var Store = function () {
       return this.fetch.catch(callback);
     }
   }, {
+    key: 'serialize',
+    value: function serialize(response) {
+      return response.json();
+    }
+  }, {
     key: 'params',
     get: function get() {
       return _queryString2.default.stringify(this.query);
@@ -177,7 +207,7 @@ var Store = function () {
   }, {
     key: 'fetch',
     get: function get() {
-      return fetch(this.url, this.request);
+      return fetch(this.url, this.request).then(this.serialize);
     }
   }]);
 
@@ -185,6 +215,7 @@ var Store = function () {
 }();
 
 exports.default = Store;
+module.exports = exports['default'];
 
 /***/ }),
 /* 2 */
@@ -18226,3 +18257,4 @@ module.exports = function(module) {
 
 /***/ })
 /******/ ]);
+});
