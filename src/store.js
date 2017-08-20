@@ -19,7 +19,7 @@ export default class Store {
   }
 
   get fetch() {
-    return fetch(this.url, this.request);
+    return fetch(this.url, this.request).then(this.serialize);
   }
 
   byID(id) {
@@ -43,5 +43,13 @@ export default class Store {
 
   done() {
     return this.fetch.then();
+  }
+
+  catch(callback) {
+    return this.fetch.catch(callback);
+  }
+
+  serialize(response) {
+    return response.json();
   }
 }

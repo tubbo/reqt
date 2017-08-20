@@ -4,6 +4,10 @@
   "main": "reqt.js",
   "author": "Tom Scott <tscott@weblinc.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  },
   "dependencies": {
     "lodash": "^4.17.4",
     "query-string": "^5.0.0",
@@ -13,6 +17,34 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
-    "webpack": "^3.5.5"
+    "jsdoc": "^3.5.4",
+    "minami": "^1.2.3",
+    "script-type-module": "^1.0.1",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "rules": {
+      "eol-last": [
+        0
+      ],
+      "no-mixed-requires": [
+        0
+      ],
+      "no-underscore-dangle": [
+        0
+      ],
+      "quotes": [
+        2,
+        "single"
+      ],
+      "strict": 0
+    }
   }
 }
