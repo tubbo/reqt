@@ -1,0 +1,18 @@
+{
+  "name": "reqt",
+  "version": "1.0.0",
+  "main": "reqt.js",
+  "author": "Tom Scott <tscott@weblinc.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "query-string": "^5.0.0",
+    "whatwg-fetch": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "webpack": "^3.5.5"
+  }
+}
