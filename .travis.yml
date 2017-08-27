@@ -1,0 +1,5 @@
+language: nodejs
+cache:
+  yarn: true
+  directories:
+    - node_modules
