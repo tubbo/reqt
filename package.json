@@ -12,8 +12,7 @@
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
-    "url": "^0.11.0",
-    "whatwg-fetch": "^2.0.3"
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
