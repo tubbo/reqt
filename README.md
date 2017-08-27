@@ -2,6 +2,8 @@
 
 A data store for modern JS applications, using the [Fetch API][fetch].
 
+[![Build Status](https://travis-ci.org/tubbo/reqt.svg?branch=master)](https://travis-ci.org/tubbo/reqt)
+
 ## Features
 
 - Uses the [WHATWG Fetch][whatwg-fetch] polyfill to ensure native
