@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
-import queryString from 'query-string';
 import { extend } from 'lodash';
+import url from 'url';
 
 export default class Store {
   constructor(collection, request = { method: 'get' }) {
@@ -8,18 +8,30 @@ export default class Store {
     this.path = collection;
     this.request = request;
     this.query = {};
-  }
-
-  get params() {
-    return queryString.stringify(this.query);
+    this.base;
+    this.format = 'json';
   }
 
   get url() {
-    return `/${this.path}.json?${this.params}`;
+    return url.format({
+      host: this.base,
+      pathname: this.path,
+      query: this.query
+    });
   }
 
   get fetch() {
     return fetch(this.url, this.request).then(this.serialize);
+  }
+
+  at(url) {
+    this.base = url;
+    return this;
+  }
+
+  as(format) {
+    this.format = format;
+    return this;
   }
 
   byID(id) {
