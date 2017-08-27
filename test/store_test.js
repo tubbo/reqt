@@ -1,6 +1,7 @@
 import Store from '../src/store'
 import chai, { assert } from 'chai';
 import chaiHTTP from 'chai-http';
+import 'isomorphic-fetch';
 
 chai.use(chaiHTTP);
 const store = new Store('test');
@@ -16,6 +17,30 @@ describe('Store', function() {
     store.as('xml');
 
     assert.equal(store.format, 'xml');
+  });
+
+  it('builds url', function() {
+    assert.equal(store.url, 'http://localhost/test');
+
+    store.at('http://test.host')
+    assert.equal(store.url, 'http://test.host/test');
+
+    store.at('https://test.host')
+    assert.equal(store.url, 'https://test.host/test');
+
+    store.at('https://test.host:1337')
+    assert.equal(store.url, 'https://test.host:1337/test');
+  });
+
+  it('sets request body', function() {
+    let body = { foo: 'bar' };
+    let json = JSON.stringify(body);
+
+    store.with(body);
+    assert.equal(store.request.body, json);
+
+    store.with('somestring');
+    assert.equal(store.request.body, 'somestring');
   });
 
   it('finds by id', function() {
@@ -36,9 +61,17 @@ describe('Store', function() {
     assert.equal(store.query.sort.direction, 'descending');
   });
 
-  it('resolves promise from fetch()');
-  it('appends callback onto promise chain');
-  it('catches promise error');
+  it('resolves promise from fetch()', function() {
+    assert.isEmpty(store.done());
+  });
+
+  it('appends callback onto promise chain', function() {
+    assert.isEmpty(store.then());
+  });
+
+  it('catches promise error', function() {
+    assert.isEmpty(store.catch());
+  });
 
   it('serializes response into json', function() {
     let response = {

@@ -1,14 +1,15 @@
-import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import { extend } from 'lodash';
 import url from 'url';
 
 export default class Store {
   constructor(collection, request = { method: 'get' }) {
     this.collection = collection;
-    this.path = collection;
+    this.path = `/${collection}`;
     this.request = request;
     this.query = {};
-    this.base;
+    this.base = '/';
+    this.port = 80;
     this.format = 'json';
   }
 
@@ -32,6 +33,14 @@ export default class Store {
   as(format) {
     this.format = format;
     return this;
+  }
+
+  with(body = {}) {
+    if (typeof body === 'string') {
+      this.request.body = body;
+    } else {
+      this.request.body = JSON.stringify(body);
+    }
   }
 
   byID(id) {

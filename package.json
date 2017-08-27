@@ -10,6 +10,7 @@
     "test": "mocha --compilers js:babel-core/register"
   },
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "url": "^0.11.0",
     "whatwg-fetch": "^2.0.3"
@@ -26,6 +27,7 @@
     "jsdoc": "^3.5.4",
     "minami": "^1.2.3",
     "mocha": "^3.5.0",
+    "node-fetch": "^1.7.2",
     "script-type-module": "^1.0.1",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
