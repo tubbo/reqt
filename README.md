@@ -107,14 +107,19 @@ promises, developers using Reqt are working with an expected API.
 
 Contributions are encouraged using GitHub Pull Requests. All
 contributions must pass the test suite and are subject to the code of
-conduct.
+conduct. We also encourage contributors to add to the documentation if
+they change the API.
 
 To run the test suite:
 
     yarn test
 
+To build documentation locally:
+
+    yarn docs
+
 [fetch]: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 [whatwg-fetch]: https://www.npmjs.com/package/whatwg-fetch
 [json]: http://json.org/
-
+[promises]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 

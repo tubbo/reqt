@@ -7,7 +7,8 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
-    "test": "mocha --compilers js:babel-core/register"
+    "test": "mocha --compilers js:babel-core/register",
+    "docs": "jsdoc src/*.js -d docs -R ./README.md"
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",

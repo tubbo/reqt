@@ -70,7 +70,8 @@ describe('Store', function() {
   });
 
   it('catches promise error', function() {
-    assert.isEmpty(store.catch());
+    store.catch(function() { console.log('caught error'); });
+    assert.isEmpty(store.then());
   });
 
   it('serializes response into json', function() {
