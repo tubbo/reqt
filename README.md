@@ -1,6 +1,6 @@
 # reqt
 
-A data store for modern JS applications, using the [Fetch API][fetch].
+An Ajax library for modern JS applications, using the [Fetch API][fetch].
 
 [![Build Status](https://travis-ci.org/tubbo/reqt.svg?branch=master)](https://travis-ci.org/tubbo/reqt)
 
@@ -11,6 +11,7 @@ A data store for modern JS applications, using the [Fetch API][fetch].
 - Lazily makes requests until data is needed
 - Most methods are chainable for composability
 - Serializes all objects to [JSON][json]
+- Encapsulates responses within a [Promise][promises], just like `fetch()`
 
 ## Installation
 
@@ -31,13 +32,21 @@ You can also install from source with the following steps:
 
 ## Usage
 
+Reqt initiates all HTTP requests using the `then()` or `done()` methods
+to indicate we want to fulfill the promise. Read further to find out how
+to make each kind of HTTP request with Reqt:
+
+### Finding Resources
+
 Import the `find()` function to fetch JSON data from your API:
 
 ```javascript
 import { find } from 'reqt';
 
-find('users').byID('test').then(user => console.log(user));
+find('users').byID('test').done();
 ```
+
+### Creating resources
 
 You can also use the `create()` function to create new data from
 existing actions:
@@ -50,7 +59,7 @@ let params = {
   password: 'password'
 };
 
-create('users').with(params).then(user => console.log(user));
+create('users').with(params).done();
 ```
 
 ### Updating found resources
@@ -63,22 +72,24 @@ To update a single or collection of attributes on a single resource
 (using the `PATCH` method):
 
 ```javascript
-import { find } from 'reqt';
+import { update } from 'reqt';
 
-find('users').byID(1).update.with({ password: 'newpassword' });
+update('users').byID(1).with({ password: 'newpassword' }).done();
 ```
 
 You can also replace entire resources with the `PUT` method and the
 `replace` action in Reqt:
 
 ```javascript
-import { find } from 'reqt';
+import { replace } from 'reqt';
 
-find('users').byID(1).replace.with({
+let params = {
   id: 1,
   username: 'test',
   password: 'newpassword'
-});
+};
+
+replace('users').byID(1).with(params).done();
 ```
 
 ### Destroying Resources
@@ -87,13 +98,10 @@ After finding a resource, you may want to issue a `DELETE` request. To
 do this, run the following:
 
 ```javascript
-import { find } from 'reqt';
+import { destroy } from 'reqt';
 
-find('users').byID(1).destroy();
+destroy('users').byID(1).done();
 ```
-
-The `destroy()` method will automatically call the promise, so calling
-`then()` will execute any code immediately.
 
 ## How It Works
 
